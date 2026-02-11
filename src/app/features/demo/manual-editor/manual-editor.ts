@@ -141,7 +141,7 @@ export class ManualEditor implements OnInit {
 			}`,
 			adCalendar: `{
 			  "calendarType": "AD",
-			  "placeholder": "BS datepicker"
+			  "placeholder": "AD datepicker"
 			}`,
 		};
 
