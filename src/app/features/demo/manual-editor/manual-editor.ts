@@ -4,15 +4,15 @@ import {DatePickerConfig, NgxNepaliDualpicker} from "ngx-nepali-dualpicker";
 import {DatePickerSchema} from '../../date-picker.schema';
 
 @Component({
-  selector: 'app-manual-editor',
-    imports: [
-        FormsModule,
-        NgxNepaliDualpicker
-    ],
-  templateUrl: './manual-editor.html',
-  styleUrl: './manual-editor.scss',
+	selector: 'app-manual-editor',
+	imports: [
+		FormsModule,
+		NgxNepaliDualpicker
+	],
+	templateUrl: './manual-editor.html',
+	styleUrl: './manual-editor.scss',
 })
-export class ManualEditor implements OnInit{
+export class ManualEditor implements OnInit {
 	// Manual configuration editor state
 	manualConfigText: string = `{
 	  "theme": "ocean",
@@ -134,6 +134,14 @@ export class ManualEditor implements OnInit{
 			  "maxDate": { "year": 2081, "month": 12, "day": 30 },
 			  "disabledDaysOfWeek": [0, 6],
 			  "placeholder": "Business Days Only"
+			}`,
+			bsCalendar: `{
+			  "calendarType": "BS",
+			  "placeholder": "BS datepicker"
+			}`,
+			adCalendar: `{
+			  "calendarType": "AD",
+			  "placeholder": "BS datepicker"
 			}`,
 		};
 
