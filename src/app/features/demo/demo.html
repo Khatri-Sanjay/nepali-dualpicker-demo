@@ -1,0 +1,97 @@
+<div class="dual-picker-showcase">
+  <!-- Header -->
+  <header class="showcase-header">
+    <div class="header-content">
+      <h1 class="header-title">📅 Nepali Dual Date Picker</h1>
+      <p class="header-subtitle">
+		  A powerful BS (Bikram Sambat) & AD (Gregorian) date picker for Angular —
+		  featuring automatic date conversion, flexible formatting, multiple selection modes,
+		  customizable themes, and built-in multi-currency formatting support.
+      </p>
+      <div class="header-info">
+        <code class="install-cmd">npm install ngx-nepali-dualpicker</code>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-navigation">
+    @for (tab of tabs; track $index) {
+      <button class="tab-btn" [class.active]="activeTab === tab.id" (click)="setActiveTab(tab.id)">
+        <span class="tab-icon">{{ tab.icon }}</span>
+        <span class="tab-label">{{ tab.label }}</span>
+      </button>
+    }
+  </nav>
+
+  <!-- Tab Content -->
+  <main class="tab-content">
+    @if (activeTab === 'basics') {
+      <section class="tab-panel">
+		<app-basic/>
+      </section>
+    }
+
+    @if (activeTab === 'languages') {
+      <section class="tab-panel">
+		<app-languages/>
+      </section>
+    }
+
+    @if (activeTab === 'modes') {
+      <section class="tab-panel">
+		<app-modes/>
+      </section>
+    }
+
+    @if (activeTab === 'themes') {
+      <section class="tab-panel">
+		  <app-themes/>
+      </section>
+    }
+
+    @if (activeTab === 'features') {
+      <section class="tab-panel">
+		<app-features/>
+      </section>
+    }
+
+    @if (activeTab === 'restrictions') {
+      <section class="tab-panel">
+		<app-restrictions/>
+      </section>
+    }
+
+    @if (activeTab === 'config') {
+      <section class="tab-panel">
+        <app-config/>
+      </section>
+    }
+
+    @if (activeTab === 'pipes') {
+      <section class="tab-panel">
+		<app-pipes/>
+      </section>
+    }
+
+    @if (activeTab === 'conversion') {
+      <section class="tab-panel">
+		<app-conversion/>
+      </section>
+    }
+
+    @if (activeTab === 'manual') {
+      <section class="tab-panel">
+        <app-manual-editor/>
+      </section>
+    }
+  </main>
+
+  <!-- Footer -->
+  <footer class="showcase-footer">
+    <div class="footer-content">
+      <p><strong>Installation:</strong> <code>npm install ngx-nepali-dualpicker</code></p>
+      <p><strong>Import:</strong> <code>import &#123; NgxNepaliDualpicker &#125; from 'ngx-nepali-dualpicker';</code></p>
+    </div>
+  </footer>
+</div>

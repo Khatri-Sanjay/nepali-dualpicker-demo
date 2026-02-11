@@ -1,0 +1,28 @@
+<div class="panel-header">
+	<h2>Language Support</h2>
+	<p>Switch between English and Nepali interfaces</p>
+</div>
+
+<div class="content-grid">
+	<div class="feature-card">
+		<h3>English Interface</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="englishConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  language: 'en',
+  placeholder: 'Select Date (English)'
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Nepali Interface (नेपाली)</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="nepaliConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  language: 'ne',
+  placeholder: 'मिति छान्नुहोस्'
+&#125;;</code></pre>
+	</div>
+</div>

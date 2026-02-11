@@ -1,0 +1,62 @@
+<div class="panel-header">
+	<h2>Special Features</h2>
+	<p>Auto-convert, manual input, inline display, and more</p>
+</div>
+
+<div class="content-grid">
+	<div class="feature-card">
+		<h3>Auto-Convert BS ↔ AD</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="autoConvertConfig"></ngx-nepali-dualpicker>
+		</div>
+		<div class="feature-tip">💡 Automatically converts between calendars</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  autoConvert: true
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Manual Text Input</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="manualInputConfig"></ngx-nepali-dualpicker>
+		</div>
+		<div class="feature-tip">⌨️ Type dates directly or use calendar</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  allowManualInput: true,
+  displayFormat: 'yyyy-MM-dd'
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Mode Toggle</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="modeToggleConfig"></ngx-nepali-dualpicker>
+		</div>
+		<div class="feature-tip">🔄 Switch between single/range/multiple</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  allowModeToggle: true
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Clear & Today Buttons</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="withButtonsConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  showClearButton: true,
+  showTodayButton: true
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card full-width">
+		<h3>Inline Calendar (Always Visible)</h3>
+		<div class="demo-area centered">
+			<ngx-nepali-dualpicker [config]="inlineConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  inline: true,
+  showTodayButton: true
+&#125;;</code></pre>
+	</div>
+</div>

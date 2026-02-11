@@ -1,0 +1,180 @@
+<div class="manual-config-section">
+	<div class="panel-header">
+		<h2>🛠️ Manual Configuration Editor</h2>
+		<p>Write and test your date picker configuration in real-time with JSON</p>
+	</div>
+
+	<!-- Preset Buttons -->
+	<div class="preset-buttons">
+		<button class="preset-btn" (click)="loadPreset('minimal')">📄 Minimal</button>
+		<button class="preset-btn" (click)="loadPreset('complete')">📋 Complete</button>
+		<button class="preset-btn" (click)="loadPreset('range')">📅 Range Mode</button>
+		<button class="preset-btn" (click)="loadPreset('nepali')">🇳🇵 Nepali</button>
+		<button class="preset-btn" (click)="loadPreset('custom')">🎨 Custom Theme</button>
+		<button class="preset-btn" (click)="loadPreset('inline')">📌 Inline</button>
+		<button class="preset-btn" (click)="loadPreset('restricted')">🚫 Restricted</button>
+		<button class="preset-btn" (click)="loadPreset('bsCalendar')">📅 BS Calendar</button>
+		<button class="preset-btn" (click)="loadPreset('adCalendar')">📅 AD Calendar</button>
+	</div>
+
+	<!-- Editor Grid -->
+	<div class="editor-grid">
+		<!-- Left: Code Editor -->
+		<div class="editor-panel">
+			<div class="editor-header">
+				<h3>Configuration JSON</h3>
+				<div class="editor-actions">
+					<button class="action-btn" (click)="beautifyConfig()" title="Format JSON">
+						<span>✨</span> Beautify
+					</button>
+					<button class="action-btn" (click)="minifyConfig()" title="Minify JSON">
+						<span>🗜️</span> Minify
+					</button>
+					<button class="action-btn" (click)="resetManualConfig()" title="Reset to Default">
+						<span>🔄</span> Reset
+					</button>
+				</div>
+			</div>
+
+			<textarea
+				class="config-editor"
+				[(ngModel)]="manualConfigText"
+				(input)="applyManualConfig()"
+				placeholder="Enter DatePickerConfig JSON..."
+				spellcheck="false"
+			></textarea>
+
+			<!-- Error Display -->
+			<div class="config-status" [class.error]="!isValidConfig" [class.success]="isValidConfig">
+				<div class="status-indicator">
+					<span class="status-icon">{{ isValidConfig ? '✓' : '✗' }}</span>
+					<span class="status-text">{{ isValidConfig ? 'Valid Configuration' : 'Invalid JSON' }}</span>
+				</div>
+				@if (configError) {
+					<div class="error-message">
+						{{ configError }}
+					</div>
+				}
+			</div>
+
+			<!-- Apply Button -->
+			<button class="apply-btn" (click)="applyManualConfig()" [disabled]="!isValidConfig">
+				Apply Configuration
+			</button>
+		</div>
+
+		<!-- Right: Live Preview -->
+		<div class="preview-panel">
+			<div class="preview-header">
+				<h3>Live Preview</h3>
+				<span class="preview-badge">Real-time</span>
+			</div>
+
+			<div class="preview-area">
+				@if (isValidConfig) {
+					<!--@let currentConfig = manualDateConfig();
+					@let configKey = getConfigKey();-->
+
+					<div [attr.data-config-key]="getConfigKey()">
+						<ngx-nepali-dualpicker [config]="manualDateConfig()"></ngx-nepali-dualpicker>
+					</div>
+				} @else {
+					<div class="preview-error">
+						<div class="error-icon">⚠️</div>
+						<p>Fix the JSON errors to see the preview</p>
+					</div>
+				}
+			</div>
+
+			<!-- Current Config Display -->
+			@if (isValidConfig) {
+				<div class="current-config">
+					<h4>Applied Configuration</h4>
+					<div class="config-properties">
+						@for (key of getConfigKeys(); track key) {
+							<div class="config-prop">
+								<span class="prop-key">{{ key }}:</span>
+								<span class="prop-value">{{ getConfigValue(key) }}</span>
+							</div>
+						}
+						@if (getConfigKeys().length === 0) {
+							<div class="config-prop empty">
+								<span class="prop-key">No properties set</span>
+							</div>
+						}
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+
+	<!-- Configuration Reference -->
+	<div class="config-reference">
+		<h3>📚 Configuration Reference</h3>
+		<div class="reference-grid">
+			<div class="reference-card">
+				<h4>Theme & Appearance</h4>
+				<code>theme: "light" | "dark" | "ocean" | "forest" | "purple" | "rose" | "system"</code>
+				<code>language: "en" | "ne"</code>
+				<code>customTheme: DatePickerTheme</code>
+			</div>
+
+			<div class="reference-card">
+				<h4>Calendar Settings ⭐</h4>
+				<code><strong>calendarType: "BS" | "AD"</strong></code>
+				<code>displayFormat: <br>'yyyy-MM-dd' | 'yyyy/MM/dd' | 'MM/dd/yyyy' | 'dd/MM/yyyy' | 'MMM dd, yyyy' | 'dd-MM-yyyy'</code>
+				<code>outputFormat: <br> 'yyyy-MM-dd' | 'yyyy/MM/dd' | 'MM/dd/yyyy' | 'dd/MM/yyyy' | 'dd-MM-yyyy';</code>
+				<code>placeholder: string</code>
+				<div class="config-note">
+					💡 Change <code>calendarType</code> to switch between Bikram Sambat (BS) and Gregorian (AD)
+					calendars
+				</div>
+			</div>
+
+			<div class="reference-card">
+				<h4>Selection Mode</h4>
+				<code>mode: "single" | "range" | "multiple"</code>
+				<code>closeOnSelect: boolean</code>
+				<code>multipleSelectionSettings: &#123; maxSelections?: number &#125;</code>
+			</div>
+
+			<div class="reference-card">
+				<h4>UI Features</h4>
+				<code>showTodayButton: boolean</code>
+				<code>showClearButton: boolean</code>
+				<code>allowManualInput: boolean</code>
+				<code>allowModeToggle: boolean</code>
+				<code>inline: boolean</code>
+			</div>
+
+			<div class="reference-card">
+				<h4>Date Restrictions</h4>
+				<code>minDate: &#123; year, month, day &#125;</code>
+				<code>maxDate: &#123; year, month, day &#125;</code>
+				<code>disabledDates: DateObject[]</code>
+				<code>disabledDaysOfWeek: number[]</code>
+			</div>
+
+			<div class="reference-card">
+				<h4>Advanced</h4>
+				<code>autoConvert: boolean</code>
+			</div>
+		</div>
+	</div>
+
+	<!-- Tips -->
+	<div class="editor-tips">
+		<h4>💡 Tips</h4>
+		<ul>
+			<li>Use the preset buttons to quickly load common configurations</li>
+			<li>The preview updates in real-time as you type valid JSON</li>
+			<li>Click "Beautify" to format your JSON for better readability</li>
+			<li>
+				Try the <strong>BS Calendar</strong> and <strong>AD Calendar</strong> presets to see calendar type
+				switching
+			</li>
+			<li>All configuration properties are optional - only set what you need</li>
+			<li>Check the Configuration Reference below for available options</li>
+		</ul>
+	</div>
+</div>

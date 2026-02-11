@@ -18,10 +18,16 @@
 - [Installation](#-installation)
 - [Quick Start](#-quick-start-angular-17-standalone)
 - [Usage Examples](#-usage-examples)
+- [Selection Modes](#-selection-modes)
+- [Language Support](#-language-support)
+- [Custom Themes](#-custom-themes-advanced)
+- [Date Restrictions](#-date-restrictions)
+- [Pipes & Utilities](#-pipes--utilities)
+- [Global Configuration](#-global-configuration)
 - [FAQ](#-faq)
 - [Use Cases](#-use-cases)
 
-
+---
 
 ## Angular Nepali Date Picker for Bikram Sambat (BS) & Gregorian (AD)
 
@@ -108,7 +114,7 @@ Built-in themes:
 
 `light`, `dark`, `ocean`, `forest`, `purple`, `rose`
 
-Supports custom colors, typography, spacing & shadows.
+Supports custom colors, typography, spacing, shadows, transitions, and dimensions.
 
 ### 🧩 Angular Integration
 
@@ -224,20 +230,179 @@ nepaliConfig = { language: 'ne' };
 
 ---
 
-## 🎨 Custom Theme Example
+## 🎨 Custom Themes (Advanced)
+
+The DatePicker supports **full custom theming** using the `ThemeApplier` class. You can define **colors, spacing, typography, border radius, shadows, transitions, and dimensions**.
+
+All theme properties are applied as **CSS variables** internally (`--ndp-*`), allowing **dynamic runtime updates**.
+
+### Theme Object Structure
 
 ```ts
-customThemeConfig = {
-  theme: 'light',
-  customTheme: {
-    colors: {
-      primary: '#e63946',
-      selectedBg: '#e63946',
-      todayText: '#e63946'
-    }
-  }
-};
+interface DatePickerTheme {
+	colors?: { 
+		primary?: string; 
+		primaryHover?: string; 
+		primaryLight?: string; 
+		secondary?: string; 
+		background?: string; 
+		surface?: string; 
+		border?: string; 
+		text?: string; 
+		textSecondary?: string; 
+		textDisabled?: string; 
+		error?: string; 
+		success?: string; 
+		selectedBg?: string; 
+		selectedText?: string; 
+		hoverBg?: string; 
+		todayText?: string; 
+		rangeBg?: string; 
+		rangeHoverBg?: string 
+	};
+	spacing?: {
+		containerPadding: string; 
+		dateGap: string;
+		headerPadding: string;
+		pickerGap: string 
+	};
+	typography?: { 
+		fontFamily: string; 
+		fontSize: { 
+			base: string; small: string; large: string 
+		};
+		fontWeight: {
+			normal: number; medium: number; semibold: number; bold: number 
+		} 
+	};
+	borderRadius?: { 
+		small: string; medium: string; large: string; full: string 
+	};
+	shadows?: { 
+		dropdown: string; selected: string
+	};
+	transitions?: { 
+		default: string; fast: string; slow: string 
+	};
+	dimensions?: { 
+		dateSize: string; containerWidth: string; containerMaxHeight: string; iconSize: string 
+	};
+}
 ```
+
+### Applying a Custom Theme
+
+```ts
+import { Component } from '@angular/core';
+import { NgxNepaliDualpickerComponent } from 'ngx-nepali-dualpicker';
+
+@Component({
+	selector: 'app-home',
+	standalone: true,
+	imports: [NgxNepaliDualpickerComponent],
+	template: `
+    <ngx-nepali-dualpicker
+      [config]="config">
+    </ngx-nepali-dualpicker>
+  `
+})
+export class HomeComponent {
+	config = {
+		customeTheme: DatePickerTheme = {
+			colors: {
+				primary: '#ef4444',
+				primaryHover: '#dc2626',
+				primaryLight: '#fee2e2',
+				secondary: '#fca5a5',
+				background: '#1f1f1f',
+				surface: '#111111',
+				border: '#374151',
+				text: '#f9fafb',
+				textSecondary: '#d1d5db',
+				textDisabled: '#6b7280',
+				error: '#f87171',
+				success: '#34d399',
+				selectedBg: '#ef4444',
+				selectedText: '#ffffff',
+				hoverBg: '#374151',
+				todayText: '#f87171',
+				rangeBg: '#b91c1c',
+				rangeHoverBg: '#dc2626',
+			},
+			spacing: {
+				containerPadding: '14px',
+				dateGap: '6px',
+				headerPadding: '14px',
+				pickerGap: '10px',
+			},
+			typography: {
+				fontFamily: 'Inter, system-ui, sans-serif',
+				fontSize: {base: '15px', small: '13px', large: '18px'},
+				fontWeight: {normal: 400, medium: 500, semibold: 600, bold: 700},
+			},
+			borderRadius: {small: '6px', medium: '8px', large: '10px', full: '9999px'},
+			shadows: {
+				dropdown: '0 25px 30px -5px rgba(0, 0, 0, 0.3), 0 12px 12px -5px rgba(0,0,0,0.2)',
+				selected: '0 3px 10px rgba(139, 92, 246, 0.5)',
+			},
+			transitions: {
+				default: 'all 0.25s ease', fast: 'all 0.15s ease', slow: 'all 0.35s ease'
+			},
+			dimensions: {
+				dateSize: '38px', containerWidth: '340px', containerMaxHeight: '300px', iconSize: '18px'
+			},
+		}
+	};
+		
+}
+```
+## 🎨 Custom Theme Properties – Where They Are Used
+
+| Property                           | Type   | Default Example                                                                              | Description / Where It Affects UI                                                |
+| ---------------------------------- | ------ | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **colors.primary**                 | string | `#3b82f6`                                                                                    | Main color for selected dates, active buttons, and primary accents.              |
+| **colors.primaryHover**            | string | `#2563eb`                                                                                    | Hover color for primary elements like buttons and dates.                         |
+| **colors.primaryLight**            | string | `#eff6ff`                                                                                    | Lighter shade of primary, used for backgrounds of selected ranges or highlights. |
+| **colors.secondary**               | string | `#64748b`                                                                                    | Secondary accent color for less prominent buttons or highlights.                 |
+| **colors.background**              | string | `#ffffff`                                                                                    | Overall background of the date picker container.                                 |
+| **colors.surface**                 | string | `#f8fafc`                                                                                    | Background for date cells, dropdowns, and cards inside the picker.               |
+| **colors.border**                  | string | `#e2e8f0`                                                                                    | Borders of input boxes, date cells, and dropdowns.                               |
+| **colors.text**                    | string | `#0f172a`                                                                                    | Main text color for dates, labels, and headings.                                 |
+| **colors.textSecondary**           | string | `#64748b`                                                                                    | Secondary text color for disabled text or hints.                                 |
+| **colors.textDisabled**            | string | `#cbd5e1`                                                                                    | Disabled text color (unselectable dates).                                        |
+| **colors.error**                   | string | `#ef4444`                                                                                    | Error color for invalid selections or messages.                                  |
+| **colors.success**                 | string | `#10b981`                                                                                    | Success color for confirmation or valid selections.                              |
+| **colors.selectedBg**              | string | `#3b82f6`                                                                                    | Background color of selected date cells.                                         |
+| **colors.selectedText**            | string | `#ffffff`                                                                                    | Text color of selected date cells.                                               |
+| **colors.hoverBg**                 | string | `#f1f5f9`                                                                                    | Background color when hovering over date cells.                                  |
+| **colors.todayText**               | string | `#3b82f6`                                                                                    | Color of the "today" date indicator.                                             |
+| **colors.rangeBg**                 | string | `#dbeafe`                                                                                    | Background of dates within a selected range.                                     |
+| **colors.rangeHoverBg**            | string | `#bfdbfe`                                                                                    | Background of dates when hovering over a range selection.                        |
+| **spacing.containerPadding**       | string | `12px`                                                                                       | Padding inside the main date picker container.                                   |
+| **spacing.dateGap**                | string | `4px`                                                                                        | Gap between individual date cells.                                               |
+| **spacing.headerPadding**          | string | `12px`                                                                                       | Padding around the month/year header section.                                    |
+| **spacing.pickerGap**              | string | `8px`                                                                                        | Gap between multiple picker components (like AD/BS).                             |
+| **typography.fontFamily**          | string | `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif` | Font family used across the picker.                                              |
+| **typography.fontSize.base**       | string | `14px`                                                                                       | Base font size for normal date labels.                                           |
+| **typography.fontSize.small**      | string | `12px`                                                                                       | Font size for secondary text like weekdays or disabled dates.                    |
+| **typography.fontSize.large**      | string | `16px`                                                                                       | Font size for headers or highlighted text.                                       |
+| **typography.fontWeight.normal**   | number | `400`                                                                                        | Normal text weight.                                                              |
+| **typography.fontWeight.medium**   | number | `500`                                                                                        | Medium weight for emphasis.                                                      |
+| **typography.fontWeight.semibold** | number | `600`                                                                                        | Semi-bold for headings.                                                          |
+| **typography.fontWeight.bold**     | number | `700`                                                                                        | Bold weight for selected or highlighted dates.                                   |
+| **borderRadius.small**             | string | `4px`                                                                                        | Border radius for small elements like date cells.                                |
+| **borderRadius.medium**            | string | `6px`                                                                                        | Medium radius for inputs or dropdowns.                                           |
+| **borderRadius.large**             | string | `8px`                                                                                        | Large radius for picker container or panels.                                     |
+| **borderRadius.full**              | string | `9999px`                                                                                     | Fully rounded elements like circular buttons or date cells.                      |
+| **shadows.dropdown**               | string | `0 10px 25px -5px rgba(0, 0, 0, 0.1)`                                                        | Shadow for dropdown menus and popup panels.                                      |
+| **shadows.selected**               | string | `0 2px 8px rgba(59, 130, 246, 0.3)`                                                          | Shadow around selected date cells.                                               |
+| **transitions.default**            | string | `all 0.2s ease`                                                                              | Default CSS transition for hover, selection, and animations.                     |
+| **transitions.fast**               | string | `all 0.15s ease`                                                                             | Faster transitions for hover effects.                                            |
+| **transitions.slow**               | string | `all 0.3s ease`                                                                              | Slower transitions for larger UI changes.                                        |
+| **dimensions.dateSize**            | string | `36px`                                                                                       | Size (width & height) of each date cell.                                         |
+| **dimensions.containerWidth**      | string | `320px`                                                                                      | Width of the main date picker container.                                         |
+| **dimensions.containerMaxHeight**  | string | `280px`                                                                                      | Max height of the date picker container (scrollable if exceeded).                |
+| **dimensions.iconSize**            | string | `16px`                                                                                       | Size of calendar navigation icons.                                               |
 
 ---
 
@@ -266,7 +431,7 @@ customThemeConfig = {
 {{ date | nepaliDate:'EEEE, dd MMMM yyyy':'en' }}
 ```
 
-## 🔄 Date Conversion Service
+### 🔄 Date Conversion Service
 
 ```ts
 constructor(private dateService: DateConversionService) {}
@@ -301,18 +466,6 @@ Override per component:
 <ngx-nepali-dualpicker 
   [config]="{ theme: 'purple', mode: 'range' }">
 </ngx-nepali-dualpicker>
-```
-
----
-
-## 🔹 Installation & Import
-
-```bash
-	npm install ngx-nepali-dualpicker
-```
-
-```ts
-import { NgxNepaliDualpicker } from 'ngx-nepali-dualpicker';
 ```
 
 ---

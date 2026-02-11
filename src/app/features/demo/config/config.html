@@ -1,0 +1,243 @@
+<div class="panel-header">
+	<h2>Global Configuration</h2>
+	<p>Set application-wide defaults using DATE_PICKER_CONFIG injection token</p>
+</div>
+
+<!-- Overview -->
+<div class="config-section">
+	<div class="info-card">
+		<h3>🎯 What is Global Configuration?</h3>
+		<p>
+			Instead of repeating the same configuration in every component, you can set global defaults in
+			<code>app.config.ts</code>. Individual component configs will override these defaults.
+		</p>
+		<div class="info-highlight">
+			<strong>Configuration Priority:</strong> Component Config → Global Config → Default Config
+		</div>
+	</div>
+</div>
+
+<!-- Step-by-step Setup -->
+<div class="config-section">
+	<h3>📝 Step-by-Step Setup</h3>
+
+	<div class="step-card">
+		<div class="step-number">1</div>
+		<div class="step-content">
+			<h4>Import the Injection Token</h4>
+			<pre class="code-block"><code>// app.config.ts
+				<!--import &#123; ApplicationConfig &#125; from '@angular/core';-->
+import &#123; DATE_PICKER_CONFIG &#125; from 'dual-picker';</code></pre>
+		</div>
+	</div>
+
+	<div class="step-card">
+		<div class="step-number">2</div>
+		<div class="step-content">
+			<h4>Provide Global Configuration</h4>
+			<pre class="code-block"><code>export const appConfig: ApplicationConfig = &#123;
+  providers: [
+    &#123;
+      provide: DATE_PICKER_CONFIG,
+      useValue: &#123;
+        theme: 'ocean',           // All pickers use ocean theme
+        language: 'en',           // English by default
+        displayFormat: 'yyyy-MM-dd',
+        showTodayButton: true,
+        showClearButton: true,
+        calendarType: 'BS'
+      &#125;
+    &#125;
+  ]
+&#125;;</code></pre>
+		</div>
+	</div>
+
+	<div class="step-card">
+		<div class="step-number">3</div>
+		<div class="step-content">
+			<h4>Use in Components</h4>
+			<pre class="code-block"><code>// Component uses global config
+&lt;ngx-nepali-dualpicker&gt;&lt;/ngx-nepali-dualpicker&gt;
+
+// Override specific properties
+&lt;ngx-nepali-dualpicker
+  [config]="&#123; theme: 'dark' &#125;"&gt;
+&lt;/ngx-nepali-dualpicker&gt;</code></pre>
+		</div>
+	</div>
+</div>
+
+<!-- Live Examples -->
+<div class="config-section">
+	<h3>🔍 Live Examples</h3>
+	<p class="section-desc">These examples demonstrate global configuration with component-level overrides</p>
+
+	<div class="content-grid">
+		<div class="feature-card">
+			<h3>Using Global Config Only</h3>
+			<div class="demo-area">
+				<ngx-nepali-dualpicker></ngx-nepali-dualpicker>
+			</div>
+			<div class="feature-tip">✨ Inherits all global settings</div>
+			<pre class="code-block"><code>// No config needed - uses globals
+&lt;ngx-nepali-dualpicker&gt;&lt;/ngx-nepali-dualpicker&gt;</code></pre>
+		</div>
+
+		<div class="feature-card">
+			<h3>Override Theme Only</h3>
+			<div class="demo-area">
+				<ngx-nepali-dualpicker [config]="overrideThemeConfig"></ngx-nepali-dualpicker>
+			</div>
+			<div class="feature-tip">🎨 Changes theme, keeps other globals</div>
+			<pre class="code-block"><code>// Override just the theme
+[config]="&#123; theme: 'purple' &#125;"</code></pre>
+		</div>
+
+		<div class="feature-card">
+			<h3>Override Multiple Properties</h3>
+			<div class="demo-area">
+				<ngx-nepali-dualpicker [config]="overrideMultipleConfig"></ngx-nepali-dualpicker>
+			</div>
+			<div class="feature-tip">⚙️ Custom config + global fallbacks</div>
+			<pre class="code-block"><code>// Override multiple properties
+[config]="&#123;
+  language: 'ne',
+  mode: 'range',
+  closeOnSelect: false
+&#125;"</code></pre>
+		</div>
+
+		<div class="feature-card">
+			<h3>Complete Override</h3>
+			<div class="demo-area">
+				<ngx-nepali-dualpicker [config]="completeOverrideConfig"></ngx-nepali-dualpicker>
+			</div>
+			<div class="feature-tip">🔧 Fully custom configuration</div>
+			<pre class="code-block"><code>// Completely custom config
+[config]="&#123;
+  theme: 'forest',
+  calendarType: 'AD',
+  language: 'en',
+  mode: 'single',
+  inline: false,
+  showTodayButton: false,
+  showClearButton: false
+&#125;"</code></pre>
+		</div>
+	</div>
+</div>
+
+<!-- Common Use Cases -->
+<div class="config-section">
+	<h3>💼 Common Use Cases</h3>
+
+	<div class="usecase-grid">
+		<div class="usecase-card">
+			<h4>🏢 Corporate Branding</h4>
+			<pre class="code-block"><code>&#123;
+  provide: DATE_PICKER_CONFIG,
+  useValue: &#123;
+    theme: 'light',
+    customTheme: &#123;
+      colors: &#123;
+        primary: '#0066cc',      // Brand color
+        primaryHover: '#0052a3'
+      &#125;
+    &#125;,
+    displayFormat: 'dd/MM/yyyy'
+  &#125;
+&#125;</code></pre>
+		</div>
+
+		<div class="usecase-card">
+			<h4>🌍 Multilingual App</h4>
+			<pre class="code-block"><code>&#123;
+  provide: DATE_PICKER_CONFIG,
+  useValue: &#123;
+    language: getCurrentLanguage(), // 'en' or 'ne'
+    calendarType: 'BS',
+    displayFormat: 'MMMM dd, yyyy'
+  &#125;
+&#125;</code></pre>
+		</div>
+
+		<div class="usecase-card">
+			<h4>📱 Consistent Mobile Experience</h4>
+			<pre class="code-block"><code>&#123;
+  provide: DATE_PICKER_CONFIG,
+  useValue: &#123;
+    theme: 'dark',
+    closeOnSelect: true,
+    showTodayButton: true,
+    allowManualInput: false
+  &#125;
+&#125;</code></pre>
+		</div>
+
+		<div class="usecase-card">
+			<h4>📊 Business Application</h4>
+			<pre class="code-block"><code>&#123;
+  provide: DATE_PICKER_CONFIG,
+  useValue: &#123;
+    calendarType: 'BS',
+    mode: 'range',
+    closeOnSelect: false,
+    disabledDaysOfWeek: [0, 6], // No weekends
+    showClearButton: true
+  &#125;
+&#125;</code></pre>
+		</div>
+	</div>
+</div>
+
+<!-- Benefits -->
+<div class="config-section">
+	<div class="benefits-card">
+		<h3>✅ Benefits of Global Configuration</h3>
+		<ul class="benefits-list">
+			<li><strong>Consistency:</strong> Maintain uniform UI/UX across your entire application</li>
+			<li><strong>Efficiency:</strong> Write less code - no need to repeat common configurations</li>
+			<li><strong>Maintainability:</strong> Update all date pickers from a single location</li>
+			<li><strong>Flexibility:</strong> Override global settings when needed for specific use cases</li>
+			<li><strong>Type Safety:</strong> Full TypeScript support with autocomplete</li>
+		</ul>
+	</div>
+</div>
+
+<!-- Best Practices -->
+<div class="config-section">
+	<div class="best-practices-card">
+		<h3>💡 Best Practices</h3>
+		<div class="practice-grid">
+			<div class="practice-item">
+				<span class="practice-icon">✓</span>
+				<div>
+					<strong>Set Common Defaults Globally</strong>
+					<p>Theme, language, date format, button visibility</p>
+				</div>
+			</div>
+			<div class="practice-item">
+				<span class="practice-icon">✓</span>
+				<div>
+					<strong>Override for Special Cases</strong>
+					<p>Inline pickers, range selectors, custom validations</p>
+				</div>
+			</div>
+			<div class="practice-item">
+				<span class="practice-icon">✓</span>
+				<div>
+					<strong>Keep It Simple</strong>
+					<p>Only set properties that truly apply application-wide</p>
+				</div>
+			</div>
+			<div class="practice-item">
+				<span class="practice-icon">✓</span>
+				<div>
+					<strong>Document Your Config</strong>
+					<p>Add comments explaining why certain defaults were chosen</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

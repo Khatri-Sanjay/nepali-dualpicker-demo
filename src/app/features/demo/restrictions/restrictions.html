@@ -1,0 +1,44 @@
+<div class="panel-header">
+	<h2>Date Restrictions</h2>
+	<p>Control which dates users can select</p>
+</div>
+
+<div class="content-grid">
+	<div class="feature-card">
+		<h3>Min & Max Dates</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="restrictedDatesConfig"></ngx-nepali-dualpicker>
+		</div>
+		<div class="feature-tip">📅 Only 2080-2081 selectable</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  minDate: &#123; year: 2080, month: 1, day: 1 &#125;,
+  maxDate: &#123; year: 2081, month: 12, day: 30 &#125;
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Disable Weekends</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="noWeekendsConfig"></ngx-nepali-dualpicker>
+		</div>
+		<div class="feature-tip">🚫 Saturday & Sunday disabled</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  disabledDaysOfWeek: [0, 6]
+  // 0 = Sunday, 6 = Saturday
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Blacklist Specific Dates</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="blacklistDatesConfig"></ngx-nepali-dualpicker>
+		</div>
+		<div class="feature-tip">⛔ Holidays or blocked dates</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  disabledDates: [
+    &#123; year: 2081, month: 10, day: 15 &#125;,
+    &#123; year: 2081, month: 11, day: 1 &#125;
+  ]
+&#125;;</code></pre>
+	</div>
+</div>

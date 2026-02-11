@@ -1,0 +1,116 @@
+<div class="panel-header">
+	<h2>Pipes & Utilities</h2>
+	<p>Format dates and currency with built-in pipes</p>
+</div>
+
+<!-- Nepali Date Pipe - BS Dates -->
+<div class="pipe-section">
+	<h3>📋 Nepali Date Pipe - BS Format</h3>
+	<p class="pipe-desc">Format Bikram Sambat dates in various styles</p>
+
+	<div class="pipe-examples">
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'shortDate':'en'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'shortDate' : 'en' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'mediumDate':'en'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'mediumDate' : 'en' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'longDate':'en'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'longDate' : 'en' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'fullDate':'en'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'fullDate' : 'en' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'mediumDate':'ne'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'mediumDate' : 'ne' }}</span>
+		</div>
+	</div>
+</div>
+
+<!-- Nepali Date Pipe - AD Dates -->
+<div class="pipe-section">
+	<h3>📋 Nepali Date Pipe - AD Format</h3>
+	<p class="pipe-desc">Format Gregorian dates in various styles</p>
+
+	<div class="pipe-examples">
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleADDate }} | nepaliDate:'shortDate':'en':'AD'</code>
+			<span class="pipe-result">{{ sampleADDate | nepaliDate: 'shortDate' : 'en' : 'AD' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleADDate }} | nepaliDate:'mediumDate':'en':'AD'</code>
+			<span class="pipe-result">{{ sampleADDate | nepaliDate: 'mediumDate' : 'en' : 'AD' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleADDate }} | nepaliDate:'longDate':'en':'AD'</code>
+			<span class="pipe-result">{{ sampleADDate | nepaliDate: 'longDate' : 'en' : 'AD' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleADDate }} | nepaliDate:'fullDate':'en':'AD'</code>
+			<span class="pipe-result">{{ sampleADDate | nepaliDate: 'fullDate' : 'en' : 'AD' }}</span>
+		</div>
+	</div>
+</div>
+
+<!-- Custom Format -->
+<div class="pipe-section">
+	<h3>🎨 Custom Date Formats</h3>
+	<p class="pipe-desc">Use custom patterns for date formatting</p>
+
+	<div class="pipe-examples">
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'yyyy/MM/dd':'en'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'yyyy/MM/dd' : 'en' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'dd-MM-yyyy':'ne'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'dd-MM-yyyy' : 'ne' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleBSDate }} | nepaliDate:'EEEE, dd MMMM yyyy':'en'</code>
+			<span class="pipe-result">{{ sampleBSDate | nepaliDate: 'EEEE, dd MMMM yyyy' : 'en' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleADDate }} | nepaliDate:'EEEE, dd MMM yyyy':'en':'AD'</code>
+			<span class="pipe-result">{{ sampleADDate | nepaliDate: 'EEEE, dd MMM yyyy' : 'en' : 'AD' }}</span>
+		</div>
+	</div>
+</div>
+
+<!-- Currency Formatter Pipe -->
+<div class="pipe-section">
+	<h3>💰 Currency Formatter Pipe</h3>
+	<p class="pipe-desc">Format numbers as currency or convert to words</p>
+
+	<div class="pipe-examples">
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleAmount }} | currencyFormatter: 'NPR' : 'format'</code>
+			<span class="pipe-result">{{ sampleAmount | currencyFormatter: 'NPR' : 'format' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleAmount }} | currencyFormatter: 'NPR' : 'word'</code>
+			<span class="pipe-result">{{ sampleAmount | currencyFormatter: 'NPR' : 'word' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleAmount }} | currencyFormatter: 'USD' : 'format'</code>
+			<span class="pipe-result">{{ sampleAmount | currencyFormatter: 'USD' : 'format' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleAmount }} | currencyFormatter: 'USD' : 'word'</code>
+			<span class="pipe-result">{{ sampleAmount | currencyFormatter: 'USD' : 'word' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleAmount }} | currencyFormatter: 'EUR' : 'format'</code>
+			<span class="pipe-result">{{ sampleAmount | currencyFormatter: 'EUR' : 'format' }}</span>
+		</div>
+		<div class="pipe-row">
+			<code class="pipe-code">{{ sampleAmount }} | currencyFormatter: 'GBP' : 'word'</code>
+			<span class="pipe-result">{{ sampleAmount | currencyFormatter: 'GBP' : 'word' }}</span>
+		</div>
+	</div>
+</div>

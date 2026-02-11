@@ -1,0 +1,143 @@
+<div class="panel-header">
+	<h2>Theme Options</h2>
+	<p>Choose from built-in themes or create your own</p>
+</div>
+
+<div class="theme-grid">
+	<div class="theme-card">
+		<h3>Light</h3>
+		<ngx-nepali-dualpicker [config]="lightThemeConfig"></ngx-nepali-dualpicker>
+	</div>
+
+	<div class="theme-card">
+		<h3>Dark</h3>
+		<ngx-nepali-dualpicker [config]="darkThemeConfig"></ngx-nepali-dualpicker>
+	</div>
+
+	<div class="theme-card">
+		<h3>Ocean</h3>
+		<ngx-nepali-dualpicker [config]="oceanThemeConfig"></ngx-nepali-dualpicker>
+	</div>
+
+	<div class="theme-card">
+		<h3>Forest</h3>
+		<ngx-nepali-dualpicker [config]="forestThemeConfig"></ngx-nepali-dualpicker>
+	</div>
+
+	<div class="theme-card">
+		<h3>Purple</h3>
+		<ngx-nepali-dualpicker [config]="purpleThemeConfig"></ngx-nepali-dualpicker>
+	</div>
+
+	<div class="theme-card">
+		<h3>Custom Red</h3>
+		<ngx-nepali-dualpicker [config]="customThemeConfig"></ngx-nepali-dualpicker>
+	</div>
+</div>
+
+<div class="custom-theme-example">
+	<h3>Custom Theme Configuration</h3>
+	<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  theme: 'light',
+  customTheme: &#123;
+    colors: &#123;
+      primary: '#e63946',
+      primaryHover: '#d62828',
+      primaryLight: '#ffebee',
+      selectedBg: '#e63946',
+      todayText: '#e63946'
+    &#125;
+  &#125;
+&#125;;</code></pre>
+</div>
+
+<div class="panel-header" style="margin-top: 24px; text-align: left;">
+	<h2 style="font-size: 1.75rem; font-weight: 600; color: #111827; margin-bottom: 4px;">
+		Fully Customized Theme Options
+	</h2>
+	<p style="font-size: 1rem; color: #6b7280; margin: 0;">
+		Create and preview your own personalized date picker theme
+	</p>
+</div>
+
+<div class="theme-card">
+	<h3>Full Custom</h3>
+	<ngx-nepali-dualpicker [config]="fullCustomThemeConfig"></ngx-nepali-dualpicker>
+</div>
+
+<div class="custom-theme-example">
+	<h3>Full Custom Theme Configuration</h3>
+	<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  theme: 'light',
+  customTheme: &#123;
+    colors: &#123;
+      primary: '#ef4444',
+	  primaryHover: '#dc2626',
+	  primaryLight: '#fee2e2',
+	  secondary: '#fca5a5',
+	  background: '#1f1f1f',
+	  surface: '#111111',
+	  border: '#374151',
+	  text: '#f9fafb',
+	  textSecondary: '#d1d5db',
+	  textDisabled: '#6b7280',
+	  error: '#f87171',
+	  success: '#34d399',
+	  selectedBg: '#ef4444',
+	  selectedText: '#ffffff',
+	  hoverBg: '#374151',
+	  todayText: '#f87171',
+	  rangeBg: '#b91c1c',
+	  rangeHoverBg: '#dc2626',
+    &#125;
+    spacing: &#123;
+      containerPadding: '14px',
+      dateGap: '6px',
+      headerPadding: '14px',
+      pickerGap: '10px'
+    &#125;
+    typography: &#123;
+      fontFamily: 'Inter, system-ui, sans-serif',
+      fontSize: &#123; base: '15px', small: '13px', large: '18px' &#125;,
+      fontWeight: &#123; normal: 400, medium: 500, semibold: 600, bold: 700 &#125;
+    &#125;
+    borderRadius: &#123; small: '6px', medium: '8px', large: '10px', full: '9999px' &#125;
+    shadows: &#123;
+      dropdown: '0 25px 30px -5px rgba(0, 0, 0, 0.3), 0 12px 12px -5px rgba(0,0,0,0.2)',
+      selected: '0 3px 10px rgba(139, 92, 246, 0.5)'
+    &#125;
+    transitions: &#123; default: 'all 0.25s ease', fast: 'all 0.15s ease', slow: 'all 0.35s ease' &#125;
+    dimensions: &#123; dateSize: '38px', containerWidth: '340px', containerMaxHeight: '300px', iconSize: '18px' &#125;
+  &#125;
+  placeholder: 'Custom Full Theme'
+&#125;;</code></pre>
+</div>
+
+
+<div class="theme-card theme-properties-table">
+	<table>
+		<thead>
+		<tr>
+			<th>Property</th>
+			<th>Type</th>
+			<th>Default Example</th>
+			<th>Description / Where It Affects UI</th>
+		</tr>
+		</thead>
+		<tbody>
+			@for (prop of themeProperties; track $index) {
+				<tr>
+					<td data-label="Property">{{ prop.property }}</td>
+					<td data-label="Type">{{ prop.type }}</td>
+					<td data-label="Default Example">
+						@if (prop.property.includes('color')) {
+							<span class="color-box" [style.background]="prop.defaultValue"></span>
+						}
+						{{ prop.defaultValue }}
+					</td>
+					<td data-label="Description / Where It Affects UI">{{ prop.description }}</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

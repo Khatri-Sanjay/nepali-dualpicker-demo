@@ -1,0 +1,43 @@
+<div class="panel-header">
+	<h2>Selection Modes</h2>
+	<p>Single date, date range, or multiple dates</p>
+</div>
+
+<div class="content-grid">
+	<div class="feature-card">
+		<h3>Single Date</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="singleDateConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  mode: 'single',
+  placeholder: 'Pick a Single Date'
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Date Range</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="dateRangeConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  mode: 'range',
+  closeOnSelect: false,
+  placeholder: 'Select Date Range'
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>Multiple Dates (Max 5)</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="multipleDatesConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  mode: 'multiple',
+  closeOnSelect: false,
+  multipleSelectionSettings: &#123;
+    maxSelections: 5
+  &#125;
+&#125;;</code></pre>
+	</div>
+</div>

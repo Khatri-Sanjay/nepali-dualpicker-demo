@@ -1,0 +1,86 @@
+<div class="panel-header">
+	<h2>Date Conversion Service</h2>
+	<p>Convert between BS and AD dates programmatically</p>
+</div>
+
+<!-- Interactive Conversion -->
+<div class="conversion-section">
+	<div class="converter-card">
+		<h3>🔄 BS to AD Converter</h3>
+		<div class="converter-input">
+			<label>BS Date (YYYY-MM-DD):</label>
+			<input type="text" [formControl]="bsToAdInput" placeholder="2081-10-15" class="converter-field"/>
+			<button (click)="convertBStoAD()" class="convert-btn">Convert →</button>
+		</div>
+		@if (bsToAdResult) {
+			<div class="converter-result"><strong>AD Date:</strong> {{ bsToAdResult }}</div>
+		}
+		<pre class="code-block"><code>// Usage in component
+adDate = this.dateService.convertBsToAd('{{ sampleBSDate }}', true);
+// Returns: '{{ sampleADDate }}'</code></pre>
+	</div>
+
+	<div class="converter-card">
+		<h3>🔄 AD to BS Converter</h3>
+		<div class="converter-input">
+			<label>AD Date (YYYY-MM-DD):</label>
+			<input type="text" [formControl]="adToBsInput" placeholder="2025-01-28" class="converter-field"/>
+			<button (click)="convertADtoBS()" class="convert-btn">Convert →</button>
+		</div>
+		@if (adToBsResult) {
+			<div class="converter-result"><strong>BS Date:</strong> {{ adToBsResult }}</div>
+		}
+		<pre class="code-block"><code>// Usage in component
+bsDate = this.dateService.convertAdToBs('{{ sampleADDate }}', true);
+// Returns: '{{ sampleBSDate }}'</code></pre>
+	</div>
+</div>
+
+<!-- Service Methods -->
+<div class="service-methods">
+	<h3>📚 Available Service Methods</h3>
+
+	<div class="method-card">
+		<div class="method-header">
+			<code>getCurrentBsDate(formatted?: boolean)</code>
+		</div>
+		<p class="method-desc">Get current date in BS format</p>
+		<div class="method-example"><strong>Current BS Date:</strong> {{ getCurrentBSDate() }}</div>
+		<pre class="code-block"><code>const today = this.dateService.getCurrentBsDate(true);
+// Returns: '{{ getCurrentBSDate() }}'</code></pre>
+	</div>
+
+	<div class="method-card">
+		<div class="method-header">
+			<code>getCurrentBsYear()</code>
+		</div>
+		<p class="method-desc">Get current year in BS</p>
+		<div class="method-example"><strong>Current BS Year:</strong> {{ dateService.getCurrentBsYear() }}</div>
+	</div>
+
+	<div class="method-card">
+		<div class="method-header">
+			<code>getCurrentBsMonth()</code>
+		</div>
+		<p class="method-desc">Get current month in BS</p>
+		<div class="method-example"><strong>Current BS Month:</strong> {{ dateService.getCurrentBsMonth() }}</div>
+	</div>
+
+	<div class="method-card">
+		<div class="method-header">
+			<code>getDaysInBsMonth(year: number, month: number)</code>
+		</div>
+		<p class="method-desc">Get number of days in a BS month</p>
+		<div class="method-example">
+			<strong>Days in current month:</strong>
+			{{
+				dateService.getDaysInBsMonth(
+					Number(dateService.getCurrentBsYear()),
+					Number(dateService.getCurrentBsMonth())
+				)
+			}}
+		</div>
+		<pre class="code-block"><code>const days = this.dateService.getDaysInBsMonth(2081, 10);
+// Returns number of days in the specified BS month</code></pre>
+	</div>
+</div>

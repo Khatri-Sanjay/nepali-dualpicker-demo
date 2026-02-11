@@ -1,0 +1,51 @@
+<div class="panel-header">
+	<h2>Basic Usage</h2>
+	<p>Get started with simple BS and AD calendars</p>
+</div>
+
+<div class="content-grid">
+	<div class="feature-card">
+		<h3>BS Calendar (Bikram Sambat)</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="basicBSConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  calendarType: 'BS',
+  placeholder: 'Select BS Date'
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card">
+		<h3>AD Calendar (Gregorian)</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker [config]="basicADConfig"></ngx-nepali-dualpicker>
+		</div>
+		<pre class="code-block"><code>config: DatePickerConfig = &#123;
+  calendarType: 'AD',
+  placeholder: 'Select AD Date'
+&#125;;</code></pre>
+	</div>
+
+	<div class="feature-card full-width">
+		<h3>With Reactive Forms</h3>
+		<div class="demo-area">
+			<ngx-nepali-dualpicker
+				[config]="basicBSConfig"
+				[formControl]="dateControl"
+				(dateSelected)="onDateChange($event)"
+			></ngx-nepali-dualpicker>
+		</div>
+		@if (dateControl.value) {
+			<div class="result-display"><strong>Selected Value:</strong> {{ dateControl.value }}</div>
+		}
+		<pre class="code-block"><code>// Component
+dateControl = new FormControl('');
+
+// Template
+&lt;ngx-nepali-dualpicker
+  [config]="config"
+  [formControl]="dateControl"
+  (dateSelected)="onDateChange($event)"&gt;
+&lt;/ngx-nepali-dualpicker&gt;</code></pre>
+	</div>
+</div>
