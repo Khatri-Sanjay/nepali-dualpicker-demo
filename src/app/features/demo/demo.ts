@@ -1,14 +1,4 @@
-import {Component, computed, inject, signal, ViewEncapsulation} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {
-	CurrencyFormatterPipe,
-	DateConversionService,
-	DatePickerConfig,
-	NepaliDatePipe,
-	NgxNepaliDualpicker
-} from 'ngx-nepali-dualpicker';
-import {DatePickerSchema} from '../date-picker.schema';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {Basic} from './basic/basic';
 import {Languages} from './languages/languages';
 import {Modes} from './modes/modes';
@@ -22,17 +12,15 @@ import {Pipes} from './pipes/pipes';
 
 @Component({
 	selector: 'app-demo',
-	imports: [CommonModule, ReactiveFormsModule, NgxNepaliDualpicker, NepaliDatePipe, CurrencyFormatterPipe, FormsModule, Basic, Languages, Modes, Themes, Features, Restrictions, Config, Conversion, ManualEditor, Pipes],
+	imports: [Basic, Languages, Modes, Themes, Features, Restrictions, Config, Conversion, ManualEditor, Pipes],
 	templateUrl: './demo.html',
 	styleUrl: './demo.scss',
 	encapsulation: ViewEncapsulation.None
 })
 export class Demo {
 
-	// Active tab tracking
 	activeTab: string = 'basics';
 
-	// Tab definitions
 	tabs = [
 		{id: 'basics', label: 'Basics', icon: '📅'},
 		{id: 'languages', label: 'Languages', icon: '🌐'},
@@ -46,17 +34,10 @@ export class Demo {
 		{id: 'conversion', label: 'Conversion', icon: '🔄'},
 	];
 
-
-
 	// Change active tab
 	setActiveTab(tabId: string) {
 		this.activeTab = tabId;
 	}
-
-
-
-
-
 
 }
 
